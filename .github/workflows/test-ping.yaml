@@ -8,10 +8,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Set message output
-        run: echo "message=Hello from Ping Notification Workflow" >> $GITHUB_OUTPUT
+        id: set_message
+        run: |
+          echo "message=Hello" >> $GITHUB_OUTPUT
           echo $GITHUB_OUTPUT
     outputs: 
-      message: ${{ steps.Message.outputs.message }}
+      message: ${{ steps.set_message.outputs.message }}
 
   Notification:
     needs: [Message]
