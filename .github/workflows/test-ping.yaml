@@ -7,17 +7,13 @@ jobs:
   Message:
     runs-on: ubuntu-20.04
     steps:
-      - name: message info
-        id: message
-        run: |
-          echo "message=hello" >> $GITHUB_ENV
+      - name: Set message output
+        run: echo "message=Hello from Ping Notification Workflow" >> $GITHUB_OUTPUT
     outputs: 
       message: ${{ steps.message.outputs.message }}
 
   Notification:
     needs: Message
-    name: Notification
     uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_test.yaml@main
-    secrets: inherit
     with:
       message: ${{ needs.Message.outputs.message }}
