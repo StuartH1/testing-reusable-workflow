@@ -11,7 +11,7 @@ jobs:
         id: message
         run: |
           mkdir -p $GITHUB_WORKSPACE/outputs
-          echo hello > $GITHUB_WORKSPACE/outputs/data
+          echo "testing testing testing 123 " > $GITHUB_WORKSPACE/outputs/data
     outputs: 
       message: ${{ steps.message.outputs.data }}
   Notification:
