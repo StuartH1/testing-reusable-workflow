@@ -13,7 +13,7 @@ jobs:
           # "firstword=testing" >> $GITHUB_OUTPUT
           echo "::set-output name=message::$(echo hello)"
     outputs: 
-      message: ${{ steps.message.outputs.firstword }}
+      message: ${{ steps.message.outputs.message }}
   Notification:
     name: Notification
     uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_test.yaml@main
