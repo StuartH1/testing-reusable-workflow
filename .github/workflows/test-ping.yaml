@@ -10,8 +10,8 @@ jobs:
       - name: message info
         id: message
         run: |
-          mkdir -p $GITHUB_WORKSPACE/outputs
-          echo "firstword=testing" >> $GITHUB_OUTPUT
+          # "firstword=testing" >> $GITHUB_OUTPUT
+          echo "::set-output name=message::$(echo hello)"
     outputs: 
       message: ${{ steps.message.outputs.firstword }}
   Notification:
