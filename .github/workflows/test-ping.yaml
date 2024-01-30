@@ -10,10 +10,10 @@ jobs:
       - name: Set message output
         run: echo "message=Hello from Ping Notification Workflow" >> $GITHUB_OUTPUT
     outputs: 
-      message: ${{ steps.message.outputs.message }}
+      message: ${{ steps.Message.outputs.message }}
 
   Notification:
-    needs: Message
+    needs: [Message]
     uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_test.yaml@main
     with:
       message: ${{ needs.Message.outputs.message }}
