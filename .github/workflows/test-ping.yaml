@@ -10,11 +10,12 @@ jobs:
       - name: message info
         id: message
         run: |
-          # "firstword=testing" >> $GITHUB_OUTPUT
-          echo "::set-output name=message::$(echo hello)"
+          echo "message=hello" >> $GITHUB_ENV
     outputs: 
       message: ${{ steps.message.outputs.message }}
+
   Notification:
+    needs: Message
     name: Notification
     uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_test.yaml@main
     secrets: inherit
