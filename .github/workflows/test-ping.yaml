@@ -10,7 +10,7 @@ jobs:
       - name: Set message output
         id: set_message
         run: |
-          echo "message=Hello" >> $GITHUB_OUTPUT
+          echo "message= trying to do more than 1 message" >> $GITHUB_OUTPUT
           echo $GITHUB_OUTPUT
     outputs: 
       message: ${{ steps.set_message.outputs.message }}
