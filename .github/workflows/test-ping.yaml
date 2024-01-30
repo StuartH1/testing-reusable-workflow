@@ -15,5 +15,6 @@ jobs:
   Notification:
     needs: [Message]
     uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_test.yaml@main
+    secrets: inherit
     with:
       message: ${{ needs.Message.outputs.message }}
