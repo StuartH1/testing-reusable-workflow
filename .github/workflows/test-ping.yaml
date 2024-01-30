@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: Set message output
         run: echo "message=Hello from Ping Notification Workflow" >> $GITHUB_OUTPUT
+          echo $GITHUB_OUTPUT
     outputs: 
       message: ${{ steps.Message.outputs.message }}
 
