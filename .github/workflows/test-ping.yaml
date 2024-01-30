@@ -10,6 +10,7 @@ jobs:
       - name: message info
         id: message
         run: |
+          mkdir -p $GITHUB_WORKSPACE/outputs
           echo hello > $GITHUB_WORKSPACE/outputs/data
     outputs: 
       message: ${{ steps.message.outputs.data }}
