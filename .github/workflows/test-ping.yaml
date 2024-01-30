@@ -1,0 +1,21 @@
+name: Ping Notification
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Message:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: message info
+        id: message
+        run: |
+          echo hello > $GITHUB_WORKSPACE/outputs/data
+    outputs: 
+      message: ${{ steps.message.outputs.data }}
+  Notification:
+    name: Notification
+    uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_test.yaml@main
+    secrets: inherit
+    with:
+      message: ${{ needs.Message.outputs.message }}
