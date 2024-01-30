@@ -11,9 +11,9 @@ jobs:
         id: message
         run: |
           mkdir -p $GITHUB_WORKSPACE/outputs
-          echo "testing testing testing 123 " > $GITHUB_WORKSPACE/outputs/data
+          echo "firstword=testing" >> $GITHUB_OUTPUT
     outputs: 
-      message: ${{ steps.message.outputs.data }}
+      message: ${{ steps.message.outputs.firstword }}
   Notification:
     name: Notification
     uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_test.yaml@main
