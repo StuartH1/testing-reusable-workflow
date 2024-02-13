@@ -30,9 +30,8 @@ jobs:
 
       - name: Send message to Slack
         env:
-          STATUS: ${{ job.status }}
           TEXT: ${{ steps.get-prs.outputs.result }}
           WH_URL: ${{ secrets.SLACK_DM_URL }}
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"'"$STATUS \n $TEXT"'"}' "$WH_URL"
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"'"$TEXT"'"}' "$WH_URL"
 
