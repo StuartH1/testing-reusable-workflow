@@ -34,5 +34,5 @@ jobs:
           WH_URL: ${{ secrets.SLACK_DM_URL }}
         run: |
           FULL_MESSAGE=$(jq -n --arg text "$TEXT" '{"text":$text}')
-          curl -X POST -H 'Content-type: application/json' --data "$FULL_MESSAGE" "$WH_URL"
+          curl -X POST -H 'Content-type: application/json' --data $FULL_MESSAGE "$WH_URL"
         
