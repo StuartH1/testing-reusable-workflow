@@ -36,4 +36,6 @@ jobs:
           TEXT: ${{ steps.get-prs.outputs.result }}
           WH_URL: ${{ secrets.SLACK_DM_URL }}
         run: |
-          FULL_MESSAGE="$STATUS \n $TEXT \n $WH_URL"
+          FULL_MESSAGE="$STATUS \n $TEXT "
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"'"$FULL_MESSAGE"'"}' $WH_URL
+
