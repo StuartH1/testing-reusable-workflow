@@ -33,9 +33,5 @@ jobs:
           TEXT: ${{ steps.get-prs.outputs.result }}
           WH_URL: ${{ secrets.SLACK_DM_URL }}
         run: |
-          # Escape double quotes in TEXT
-          ESCAPED_TEXT=$(echo "$TEXT" | sed 's/"/\\"/g')
-
-          # Use the escaped TEXT in the curl command
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\": \"$ESCAPED_TEXT\"}" "$WH_URL"
-
+          FULL_MESSAGE=$(jq -n --arg text "$TEXT" '{"text":$text}')
+          curl -X POST -H 'Content-type: application/json' --data "$FULL_MESSAGE" "$WH_URL"
