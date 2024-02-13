@@ -36,4 +36,4 @@ jobs:
           # Remove surrounding quotes and escape internal double quotes in TEXT
           ESCAPED_TEXT=$(echo "$TEXT" | sed 's/^"//;s/"$//' | sed 's/"/\\"/g')
           # Use the escaped TEXT in the curl command
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\": \"DAILY UPDATE \n $ESCAPED_TEXT\"}" "$WH_URL"
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\": \"DAILY UPDATE \n$ESCAPED_TEXT\"}" "$WH_URL"
