@@ -3,8 +3,7 @@ name: Daily PR Update
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 14 * * *' # Runs at 14:00 UTC every day.
-
+    - cron: "0 14 * * *" # Runs at 14:00 UTC every day.
 
 jobs:
   pr-update:
@@ -32,9 +31,9 @@ jobs:
             return prDetails;
 
       - name: Send message to Slack
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
-          text: ${{ steps.get-prs.outputs.result }}
-          webhook-url: ${{ secrets.SLACK_DM_URL }}
+        env:
+          STATUS: ${{ job.status }}
+          TEXT: ${{ steps.get-prs.outputs.result }}
+          WH_URL: ${{ secrets.SLACK_DM_URL }}
+        run: |
+          FULL_MESSAGE="$STATUS \n $TEXT \n $WH_URL"
