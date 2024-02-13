@@ -2,7 +2,6 @@ name: Daily PR Update
 
 on:
   workflow_dispatch:
-    curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}'  14 * * *" # Runs at 14:00 UTC every day.
 
 jobs:
   pr-update:
