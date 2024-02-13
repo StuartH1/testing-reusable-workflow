@@ -2,8 +2,7 @@ name: Daily PR Update
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: "0 14 * * *" # Runs at 14:00 UTC every day.
+    curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}'  14 * * *" # Runs at 14:00 UTC every day.
 
 jobs:
   pr-update:
@@ -37,5 +36,5 @@ jobs:
           WH_URL: ${{ secrets.SLACK_DM_URL }}
         run: |
           FULL_MESSAGE="$STATUS \n $TEXT "
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"'"$FULL_MESSAGE"'"}' $WH_URL
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"$FULL_MESSAGE"}'$WH_URL 
 
