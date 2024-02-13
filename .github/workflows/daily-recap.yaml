@@ -1,0 +1,40 @@
+name: Daily PR Update
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 14 * * *' # Runs at 14:00 UTC every day.
+
+
+jobs:
+  pr-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get open PRs
+        id: get-prs
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            const dayInMillis = 24 * 60 * 60 * 1000;
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open'
+            });
+            const prDetails = prs.data.map(pr => {
+              const ageInDays = Math.round((new Date() - new Date(pr.created_at)) / dayInMillis);
+              return `- PR [#${pr.number}](${pr.html_url}) is ${ageInDays} days old.`;
+            }).join('\n');
+            return prDetails;
+
+      - name: Send message to Slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+          text: ${{ steps.get-prs.outputs.result }}
+          webhook-url: ${{ secrets.SLACK_WEBHOOK }}
