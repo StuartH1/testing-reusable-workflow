@@ -2,8 +2,8 @@ name: Daily PR Update
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 14 * * *" # Runs at 14:00 UTC every day.
+  # schedule:
+  #   - cron: "0 14 * * *" # Runs at 14:00 UTC every day.
 
 jobs:
   pr-update:
