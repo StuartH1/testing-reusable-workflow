@@ -1,38 +1,21 @@
 name: Daily PR Update
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 12 * * *" # Runs at 14:00 UTC every day.
+  workflow_call:
+        inputs:
+          prDetails:
+            description: "Pull Request details to be sent as a notification"
+            required: true
+            type: string
 
 jobs:
   pr-update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Get open PRs
-        id: get-prs
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN  }}
-          script: |
-            const dayInMillis = 24 * 60 * 60 * 1000;
-            const prs = await github.rest.pulls.list({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open'
-            });
-            const prDetails = prs.data.map(pr => {
-              const ageInDays = Math.round((new Date() - new Date(pr.created_at)) / dayInMillis);
-              return `- PR [#${pr.number}](${pr.html_url}) is ${ageInDays} days old.`;
-            }).join('\n');
-            return prDetails;
 
       - name: Send message to Slack
         env:
-          TEXT: ${{ steps.get-prs.outputs.result }}
+          TEXT: ${{ inputs.prDetails }}
           WH_URL: ${{ secrets.SLACK_DM_URL }}
         run: |
           # Remove surrounding quotes and escape internal double quotes in TEXT
