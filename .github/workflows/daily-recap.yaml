@@ -27,10 +27,10 @@ jobs:
           ESCAPED_TEXT=$(echo "$TEXT" | sed 's/^"//;s/"$//' | sed 's/"/\\"/g')
 
           # Create JSON payload using jq
-          JSON_PAYLOAD=$(jq -nc --arg text "DAILY UPDATE \n $ESCAPED_TEXT" '{"text": $text}')
+          JSON_PAYLOAD=$(jq -nc --arg text "$ESCAPED_TEXT" '{"text": $text}')
 
           # Debug: Print the JSON payload
           echo "JSON Payload: $JSON_PAYLOAD"
 
           # Use the JSON payload in the curl command
-          curl -X POST -H 'Content-type: application/json' --data "$JSON_PAYLOAD" "$WH_URL"
+          curl -X POST -H 'Content-type: application/json' --data "DAILY UPDATE \n $JSON_PAYLOAD" "$WH_URL"
