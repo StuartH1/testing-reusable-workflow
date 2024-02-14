@@ -12,6 +12,9 @@ jobs:
   pr-update:
     runs-on: ubuntu-latest
     steps:
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
       - name: Send message to Slack
         env:
           TEXT: ${{ inputs.prDetails }}
@@ -19,5 +22,7 @@ jobs:
         run: |
           # Remove surrounding quotes and escape internal double quotes in TEXT
           ESCAPED_TEXT=$(echo "$TEXT" | sed 's/^"//;s/"$//' | sed 's/"/\\"/g')
-          # Use the escaped TEXT in the curl command
-          curl -X POST -H 'Content-type: application/json' --data "{\"text\": \"DAILY UPDATE \n$ESCAPED_TEXT\"}" "$WH_URL"
+          # Create JSON payload using jq
+          JSON_PAYLOAD=$(jq -nc --arg text "DAILY UPDATE \n$ESCAPED_TEXT" '{"text": $text}')
+          # Use the JSON payload in the curl command
+          curl -X POST -H 'Content-type: application/json' --data "$JSON_PAYLOAD" "$WH_URL"
