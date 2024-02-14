@@ -2,17 +2,16 @@ name: Daily PR Update
 
 on:
   workflow_call:
-        inputs:
-          prDetails:
-            description: "Pull Request details to be sent as a notification"
-            required: true
-            type: string
+    inputs:
+      prDetails:
+        description: "Pull Request details to be sent as a notification"
+        required: true
+        type: string
 
 jobs:
   pr-update:
     runs-on: ubuntu-latest
     steps:
-
       - name: Send message to Slack
         env:
           TEXT: ${{ inputs.prDetails }}
