@@ -1,0 +1,13 @@
+name: Review Pipeline
+
+on:
+  pull_request:
+    types: [review_requested]
+
+jobs:
+  review-control:
+    name: Handler
+    uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_slack_review_notifications.yaml
+    secrets: inherit
+    with:
+      pull_request_number: ${{ github.event.pull_request.number }}

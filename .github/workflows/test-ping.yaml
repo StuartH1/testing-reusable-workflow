@@ -12,7 +12,7 @@ jobs:
         run: |
           echo "message= trying to do more than 1 message" >> $GITHUB_OUTPUT
           echo $GITHUB_OUTPUT
-    outputs: 
+    outputs:
       message: ${{ steps.set_message.outputs.message }}
 
   Notification:
@@ -21,6 +21,4 @@ jobs:
     secrets: inherit
     with:
       message: ${{ needs.Message.outputs.message }}
-
-
       #####
