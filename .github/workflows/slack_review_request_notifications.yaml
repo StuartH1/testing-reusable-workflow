@@ -8,7 +8,6 @@ jobs:
   review-control:
     name: Handler
     uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_slack_review_notifications.yaml@main
-  
     secrets: inherit
     with:
       pull_request_number: ${{ github.event.pull_request.number }}
