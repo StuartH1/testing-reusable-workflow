@@ -16,4 +16,3 @@ jobs:
     secrets: inherit
     with:
       pull_request_number: ${{ github.event.pull_request.number }}
-      codeowners_path: StuartH1/testing-reusable-workflow/.github/CODEOWNERS
