@@ -12,7 +12,7 @@ permissions:
 jobs:
   pr-auto-labeler:
     name: Labels
-    uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_pr_labeler.yml@main
+    uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_pr_labeler.yaml@main
     secrets: inherit
   review-control:
     name: Handler
