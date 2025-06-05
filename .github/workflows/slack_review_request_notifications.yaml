@@ -3,12 +3,14 @@ name: Review Pipeline
 on:
   pull_request:
     types: [review_requested]
-  issue_comment:
-    types: [created]
+
   pull_request_review:
-
-
+    types: [submitted]
 jobs:
+  pr-auto-labeler:
+    name: Labels
+    uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_pr_labeler.yml@main
+    secrets: inherit
   review-control:
     name: Handler
     uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_slack_review_notifications.yaml@main
