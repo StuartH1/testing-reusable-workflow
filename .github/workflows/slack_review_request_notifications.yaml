@@ -2,7 +2,7 @@ name: Review Pipeline
 
 on:
   pull_request:
-    types: [review_requested]
+    types: [review_requested, closed]
   pull_request_review:
     types: [submitted]
 permissions:
@@ -15,6 +15,7 @@ jobs:
     secrets: inherit
   review-control:
     name: Handler
+    needs: pr-auto-labeler
     uses: StuartH1/Reusable-Workflow/.github/workflows/reusable_slack_review_notifications.yaml@main
     secrets: inherit
     with:
